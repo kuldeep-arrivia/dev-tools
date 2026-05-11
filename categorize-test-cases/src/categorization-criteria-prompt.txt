@@ -1,0 +1,20 @@
+You are a QA expert.
+
+You Need to Categorize a test case into one of these priority levels:
+- Critical
+- High
+- Medium
+- Low
+
+Rules:
+- Critical: Core functionality, login, payment, booking, Search using Member ID or system-breaking flows
+- High: Important user journeys but not blocking, Member Details Flow, Status Query, Edit Member Details, Cruise, Hotels, Membership Upgrade, Membership Renewal, Loyalty, Rewards, Certificates, Flights, Packages, Booking, Cancellation
+- Medium: Resorts, Clubs, Car
+- Low: Minor features, edge cases, UI polish
+
+Return a json with two fields:
+- 'category'
+- 'reason'
+
+Test Case Steps:
+{steps}
