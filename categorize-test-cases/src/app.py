@@ -1,5 +1,12 @@
 import streamlit as st
-from tkinter import Tk, filedialog
+
+# Optional tkinter support
+try:
+    from tkinter import Tk, filedialog
+    TKINTER_AVAILABLE = True
+except Exception:
+    TKINTER_AVAILABLE = False
+
 from main import process
 
 # ---------------- PAGE CONFIG ----------------
@@ -97,6 +104,9 @@ if "output_file" not in st.session_state:
 
 def select_folder():
 
+    if not TKINTER_AVAILABLE:
+        return None
+
     root = Tk()
     root.withdraw()
     root.attributes('-topmost', True)
@@ -109,56 +119,74 @@ def select_folder():
 
 # ---------------- UI ----------------
 
-st.markdown('<div class="big-title">📊 Local LLM Based Test Case Categorizer</div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="big-title">📊 Local LLM Based Test Case Categorizer</div>',
+    unsafe_allow_html=True
+)
 
 st.markdown(
     '<div class="subtitle"><b>Categorize Your Test Cases</b> into <b>CRITICAL, High, Medium,</b> and Low categories, '
     '<br> by using a local LLM - <b>zero cost and even without an internet connection.</b></div>',
-    unsafe_allow_html=True 
+    unsafe_allow_html=True
 )
+
+# ---------------- PREREQUISITES ----------------
+
 with st.expander("📌 Prerequisites Before Processing", expanded=False):
 
     st.info("""
-    • Ensure Ollama is installed and running locally with the appropriate model(qwen2.5:7b) downloaded. 
+    • Ensure Ollama is installed and it is running locally with the appropriate model(qwen2.5:7b) downloaded. 
     
-    • Input folder should contain only `.xlsx` files exported from the test case folder in Azure DevOps, with columns named 'ID' and 'Steps'.
-    
-    • Generated CSV will be created inside selected input folder itself, with name `output_with_category.csv`. It will contain original ID and Steps columns along with new columns for Category and Reason.
+    • Input folder should contain only `.xlsx` files exported from the test case folder in Azure DevOps, with columns named 'ID' and 'Steps'
     
     """)
+
 st.markdown('<div class="card">', unsafe_allow_html=True)
 
-# Select Folder Button
-if st.button("📁 Select Folder"):
+# ---------------- SELECT FOLDER BUTTON ----------------
 
-    selected_folder = select_folder()
+if TKINTER_AVAILABLE:
 
-    if selected_folder:
-        st.session_state.folder_path = selected_folder
+    if st.button("📁 Select Folder"):
 
-# Show Selected Folder
-if st.session_state.folder_path:
+        selected_folder = select_folder()
 
-    st.markdown(
-        f'''
-        <div class="folder-box">
-        <strong>Selected Folder:</strong><br>
-        {st.session_state.folder_path}
-        </div>
-        ''',
-        unsafe_allow_html=True
-    )
+        if selected_folder:
 
-    # Process Button
+            st.session_state.folder_path = selected_folder
+
+# ---------------- TEXTBOX ----------------
+
+folder_input = st.text_input(
+    "📂 Folder Path (Paste folder path having test cases directly alternatively)",
+    value=st.session_state.folder_path,
+    placeholder="/data or C:/test-cases"
+)
+
+# Keep session state updated with textbox value
+st.session_state.folder_path = folder_input
+
+# ---------------- SHOW SELECTED FOLDER ----------------
+
+
+
+# ---------------- PROCESS BUTTON ----------------
+
+# Show button ONLY when textbox has value
+if st.session_state.folder_path.strip():
+
     if st.button("⚡ Categorize Test Cases"):
 
         with st.spinner("Categorizing test cases..."):
 
-            output_file = process(st.session_state.folder_path)
+            output_file = process(
+                st.session_state.folder_path
+            )
 
             st.session_state.output_file = output_file
 
-# Success Message
+# ---------------- SUCCESS MESSAGE ----------------
+
 if st.session_state.output_file:
 
     st.markdown(
