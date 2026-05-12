@@ -30,17 +30,14 @@ PROMPT = load_prompt_template()
 
 def get_category_and_reason(test_case):
 
-    print("started calculating category using LLM")
+    print("started calculating category using LLM for test case :")
     print(test_case)
 
-    #steps = test_case
 
     try:
 
         # Read prompt template from file
         prompt_template = PROMPT
-        print("========================= prompt_template ========================")
-        print(prompt_template)
 
         # Inject dynamic content
         prompt = prompt_template.format(steps=test_case)
@@ -82,20 +79,20 @@ def get_category_and_reason(test_case):
         else:
             parsed_output = {}
 
-        print("=============")
-        print(parsed_output)
+       
 
         category = normalize_category(
             parsed_output.get("category", "")
         )
 
         reason = parsed_output.get("reason", "")
-
+        print("---- result ---")
         print(
             f"category: {category}, reason: {reason}"
         )
-
+        
         print("Finished calculating category using LLM")
+        print("==============================================")
 
         return {
             "category": category,

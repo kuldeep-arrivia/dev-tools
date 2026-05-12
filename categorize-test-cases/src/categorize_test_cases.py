@@ -23,11 +23,11 @@ def process_csv(input_file, output_file):
             continue  # ✅ Skip already processed
 
         step_action = row['Step Action']
-        print("======================== step_action =========================")
+        
         result = get_category_and_reason(step_action)
         category = result["category"]
         reason = result["reason"]
-        print("category: "+category+", reason: "+reason)
+        #print("category: "+category+", reason: "+reason)
 
         new_row = pd.DataFrame([{
             'ID': test_id,

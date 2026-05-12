@@ -4,7 +4,7 @@
 ## WHY local LLM
  #### There are 100s and sometimes thousands of test cases (MemberHub application has 850+ test cases) for single application,
  #### The criteria to categorize test cases may keep evolving and hence might need finetuning - which means we might need to run the LLM on this big number of test cases multiple times - just for a single application.
- #### This activity does not need any context other then the categorization criteria (i.e. prompt) and the test cases, and hence shoud be doable even without having an  internet connection.
+ #### This activity does not need any context other than the categorization criteria (i.e. prompt) and the test cases, and hence shoud be doable even without having an  internet connection.
 
 
 ## Prerequisites
@@ -29,7 +29,7 @@
  dev-tools\categorize-test-cases> streamlit run .\src\app.py --server.address="0.0.0.0"
 ```
      
-#### b. You should the below URL launched, 
+#### b. You should see the below URL launched in your default browser, 
 ```bash
  http://localhost:8501/ 
 ```
@@ -39,6 +39,7 @@
   <img src="./assets/UI.png" alt="Graph view in LangGraph studio UI" width="75%" />
 </div>
 
+<!--
 
 ## 3. Docker way (Simpler) -
  ### Have Docker installed
@@ -55,3 +56,16 @@
  http://localhost:8501/ 
 ```
 #### [Note : The folder selection button does not work in docker app, copy paste the local folder path having test cases directly in the text box]
+-->
+
+### Troubleshooting | Miscellaneous
+ #### If you want to stop this long running process - 
+   #### Know the process ID of the streamlit process
+   ```bash
+ ps 
+```
+  #### Kill the process (below is windows command, use corresponding linux command for mac)
+   ```bash
+ taskkil /F /pid <process ID of streamlit>
+```
+
