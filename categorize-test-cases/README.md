@@ -22,9 +22,25 @@
   
    #### a. Build the application
  ```bash
+ python -m venv .venv
+```
+
+ #### b. activate virtual environment
+ Windows CMD
+ ```bash
+ .venv\Scripts\activate 
+```
+
+Linux/Mac
+```bash
+source <venv>/bin/activate
+```
+
+#### c. Install dependencies 
+ ```bash
  pip install -r requirements.txt
  ```
-#### b. Start the application
+#### d. Start the application
 ```bash
  dev-tools\categorize-test-cases> streamlit run .\src\app.py --server.address="0.0.0.0"
 ```
