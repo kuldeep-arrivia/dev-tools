@@ -2,7 +2,7 @@
 Reusable utility functionalities
 
 
-## Each sub-folder under this is a complete separate tool or application, that can be contributed by different developers.
+## Each sub-folder under this is a reusable tool or application.
 
 ## Projects
 
