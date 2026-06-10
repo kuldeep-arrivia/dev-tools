@@ -1,0 +1,16 @@
+name: New MCP server
+version: 0.0.1
+schema: v1
+mcpServers:
+  - name: search-the-web-docker
+    command: /usr/local/bin/docker  #Use the command 'which docker' to know this path for you
+    args:
+      - run
+      - --rm
+      - -i
+      - -e
+      - TAVILY_API_KEY=<your_Tavily_api_key>
+      - kuldeepshandilya/mcp-tools-ide:v1
+
+
+      
