@@ -126,7 +126,7 @@ Choose **one** of the two options below.
 2. Pull the prebuilt MCP server image:
 
    ```bash
-   docker pull kuldeepshandilya/mcp-tools-ide:v1
+   docker pull kuldeepshandilya/mcp-tools-ide:v2
    ```
 
 3. Open `.continue/mcpServers/docker-based-mcpServer.yaml` and set your Tavily API key:
