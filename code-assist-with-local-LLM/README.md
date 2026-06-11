@@ -144,7 +144,7 @@ Choose **one** of the two options below.
          - -i
          - -e
          - TAVILY_API_KEY=<your_Tavily_api_key>   # ← paste your key here
-         - kuldeepshandilya/mcp-tools-ide:v1
+         - kuldeepshandilya/mcp-tools-ide:v2
    ```
 
 #### Option B — Local Python
